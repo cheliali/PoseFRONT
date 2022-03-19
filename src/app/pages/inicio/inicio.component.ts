@@ -11,10 +11,18 @@ export class InicioComponent implements OnInit {
   url: string = 'http://127.0.0.1:5000/video_feed';
   constructor(public videoService: VideoServiceService) {}
 
-  ngOnInit(): void {
-    this.videoService.getUser();
-  }
+  ngOnInit(): void {}
   cambiar() {
-    this.mostrar = !this.mostrar;
+    if (!this.mostrar) {
+      this.videoService.startStream().subscribe((_) => {
+        console.log('start');
+        this.mostrar = true;
+      });
+    } else {
+      this.videoService.stopStream().subscribe((_) => {
+        console.log('stop');
+        this.mostrar = false;
+      });
+    }
   }
 }
