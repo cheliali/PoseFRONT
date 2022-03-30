@@ -7,7 +7,7 @@ import { User } from '../models/User';
   providedIn: 'root',
 })
 export class VideoServiceService {
-  nombre: string = '';
+  nombre: string = 'Estimación de Pose';
 
   constructor(private http: HttpClient) {}
 

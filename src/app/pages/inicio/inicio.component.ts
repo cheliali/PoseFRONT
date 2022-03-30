@@ -15,12 +15,10 @@ export class InicioComponent implements OnInit {
   cambiar() {
     if (!this.mostrar) {
       this.videoService.startStream().subscribe((_) => {
-        console.log('start');
         this.mostrar = true;
       });
     } else {
       this.videoService.stopStream().subscribe((_) => {
-        console.log('stop');
         this.mostrar = false;
       });
     }

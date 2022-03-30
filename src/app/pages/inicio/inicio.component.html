@@ -1,7 +1,9 @@
-<h1>Estimación de Pose</h1>
+<body>
+  <h1>
+    {{ videoService.nombre }}
+  </h1>
+  <hr />
+  <button (click)="cambiar()">Empezar</button>
 
-<h1>
-  {{ videoService.nombre }}
-</h1>
-<button (click)="cambiar()">Cambiar Nombre</button>
-<img *ngIf="mostrar" [src]="url" width="500" height="500" />
+  <img *ngIf="mostrar" [src]="url" width="500" height="500" />
+</body>
