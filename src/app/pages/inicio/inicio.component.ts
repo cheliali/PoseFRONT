@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { VideoServiceService } from 'src/app/servicios/video-service.service';
+import { environment } from 'src/environments/environment';
 
+const baseurl = environment.baseurl;
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
@@ -8,7 +10,7 @@ import { VideoServiceService } from 'src/app/servicios/video-service.service';
 })
 export class InicioComponent implements OnInit {
   mostrar: boolean = false;
-  url: string = 'http://127.0.0.1:5000/video_feed';
+  url: string = `${baseurl}/video_feed`;
   constructor(public videoService: VideoServiceService) {}
 
   ngOnInit(): void {}
