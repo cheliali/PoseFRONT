@@ -1,12 +1,28 @@
-h1 {
-    color: red;
-  }
-
-.video_wrapper{
-  display: flex;
-  flex-direction: column;
-
-  button{
-    width: 100px;
-  }
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+@media(min-width:768px) {
+    body {
+        margin-top: 100px;
+    }
+    /*html, body, #wrapper, #page-wrapper {height: 100%; overflow: hidden;}*/
 }
+
+/* Top Navigation */
+
+.top-nav>h1 {
+    color: white;
+}
+
+.video-wrapper{
+    margin-top: 100px;
+    margin-left: 100px;
+}
+
+.box >button{
+    width: 300px;
+    height: 200px;
+    padding: 10px;
+    border: 10px solid #ffcc00;
+    background-color: white;
+    margin-top: 200px;
+    margin-left: 100px;
+  }

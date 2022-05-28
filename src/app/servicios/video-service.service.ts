@@ -9,7 +9,7 @@ const baseurl = environment.baseurl;
   providedIn: 'root',
 })
 export class VideoServiceService {
-  nombre: string = 'Estimación de Pose';
+  nombre: string = 'Poomsae Practice';
 
   constructor(private http: HttpClient) {}
 
