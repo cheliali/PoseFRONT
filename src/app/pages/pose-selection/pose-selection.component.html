@@ -1,0 +1,38 @@
+<app-nav-bar></app-nav-bar>
+<div class="wrapper">
+  <p-tabView>
+    <p-tabPanel *ngFor="let poomsae of poomsaes" [header]="poomsae.name">
+      <p-dataView [value]="poomsae.poses">
+        <ng-template let-pose pTemplate="listItem">
+          <p-card
+            [header]="pose.name"
+            [style]="{ width: '25rem', margin: '1.5rem' }"
+            (click)="goToPractice(pose.name)"
+          >
+            <ng-template pTemplate="header">
+              <img class="card-image" alt="Card" [src]="pose.picture" />
+            </ng-template>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Inventore sed consequuntur error repudiandae numquam deserunt
+              quisquam repellat libero asperiores earum nam nobis, culpa ratione
+              quam perferendis esse, cupiditate neque quas!
+            </p>
+            <h5>
+              Ultima práctica:
+              <span style="font-weight: 300">{{
+                history[pose.name]?.lastPractice || "No hay prácticas previas"
+              }}</span>
+            </h5>
+            <h5>
+              Mejor Puntaje:
+              <span style="font-weight: 300">{{
+                history[pose.name]?.bestGrade || "No hay puntajes previos"
+              }}</span>
+            </h5>
+          </p-card>
+        </ng-template>
+      </p-dataView>
+    </p-tabPanel>
+  </p-tabView>
+</div>

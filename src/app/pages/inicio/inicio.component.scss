@@ -1,28 +1,11 @@
-@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
-@media(min-width:768px) {
-    body {
-        margin-top: 100px;
-    }
-    /*html, body, #wrapper, #page-wrapper {height: 100%; overflow: hidden;}*/
+* {
+  font-size: 15px !important;
 }
 
-/* Top Navigation */
-
-.top-nav>h1 {
-    color: white;
+.practice-picture {
+  height: 100px;
 }
 
-.video-wrapper{
-    margin-top: 100px;
-    margin-left: 100px;
+.subtable > td {
+  width: 25% !important;
 }
-
-.box >button{
-    width: 300px;
-    height: 200px;
-    padding: 10px;
-    border: 10px solid #ffcc00;
-    background-color: white;
-    margin-top: 200px;
-    margin-left: 100px;
-  }

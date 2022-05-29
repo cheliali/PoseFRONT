@@ -1,15 +1,79 @@
-<div id="wrapper">
-  <!-- Navigation -->
-  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <!-- Top Menu Items -->
-    <div class="nav navbar-right top-nav">
-      <h1>
-        {{ videoService.nombre }}
-      </h1>
-    </div>
-  </nav>
-</div>
-
-<div class="box">
-  <button>Taeguk Il Jang</button>
+<app-nav-bar></app-nav-bar>
+<div style="margin: 20px">
+  <p-table [value]="history" dataKey="pose" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 3rem"></th>
+        <th>Poomsae</th>
+        <th>Pose</th>
+        <th>Ultima Práctica</th>
+        <th>Promedio</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-historyItem let-expanded="expanded">
+      <tr>
+        <td>
+          <button
+            type="button"
+            pButton
+            pRipple
+            [pRowToggler]="historyItem"
+            class="p-button-text p-button-rounded p-button-plain"
+            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+          ></button>
+        </td>
+        <td>{{ historyItem.poomsae }}</td>
+        <td>{{ historyItem.pose }}</td>
+        <td>{{ historyItem.lastPractice }}</td>
+        <td>
+          {{ historyItem.bestGrade }}
+          <p-rating
+            [ngModel]="historyItem.rate"
+            [readonly]="true"
+            [cancel]="false"
+          ></p-rating>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-historyItem>
+      <tr>
+        <td colspan="9">
+          <div class="p-3">
+            <p-table [value]="historyItem.practices" dataKey="_id">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Fecha</th>
+                  <th>Nota</th>
+                  <th>Foto</th>
+                  <th>Observaciones</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-practice>
+                <tr class="subtable">
+                  <td>{{ practice.date }}</td>
+                  <td>{{ practice.grade }}</td>
+                  <td>
+                    <img
+                      src="{{
+                        practice.picture ||
+                          'https://st3.depositphotos.com/23594922/31822/v/600/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg'
+                      }}"
+                      alt="practice"
+                      class="practice-picture"
+                    />
+                  </td>
+                  <td>{{ practice.observations || "No hay obervaciones" }}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="3">No hay prácticas de esta pose aún.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>

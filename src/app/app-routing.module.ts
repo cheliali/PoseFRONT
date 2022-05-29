@@ -4,12 +4,17 @@ import { InicioComponent } from './pages/inicio/inicio.component';
 import { LoginComponent } from './pages/login/login.component';
 import { Poomsae1Component } from './pages/poomsae1/poomsae1.component';
 import { Pos1Component } from './positions/pos1/pos1.component';
+import { PoseSelectionComponent } from './pages/pose-selection/pose-selection.component';
+import { PosePracticeComponent } from './pages/pose-practice/pose-practice.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'inicio', component: InicioComponent },
+  { path: 'poses', component: PoseSelectionComponent },
+  { path: 'pose/:name', component: PosePracticeComponent, pathMatch: 'full' },
   { path: 'poomsae1', component: Poomsae1Component },
   { path: 'pos1', component: Pos1Component },
+  { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({
