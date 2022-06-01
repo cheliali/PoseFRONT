@@ -6,6 +6,31 @@
   height: 100px;
 }
 
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.observation-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.slider-wrapper {
+  width: 80%;
+}
+
 .subtable > td {
   width: 25% !important;
+}
+
+:host {
+  ::ng-deep .prime-slider-override {
+    .p-slider-handle {
+      display: none;
+    }
+  }
 }

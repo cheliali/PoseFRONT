@@ -8,46 +8,62 @@ const history: DBHistoryItem[] = [
     _id: '1',
     poomsae: 'poomsae 1',
     pose: 'are maki',
-    grade: 90,
     date: Date.now(),
     picture: 'https://www.taekwondoalgete.com/files/janmonyopmk.jpg',
-    observations:
-      'Eu nostrud nisi ut quis exercitation sunt anim tempor reprehenderit. Qui irure enim commodo Lorem. Exercitation aliquip elit voluptate laboris et magna veniam sint. Do quis sint excepteur duis sint ea reprehenderit. Reprehenderit et cillum pariatur fugiat officia anim qui ut mollit irure nulla nisi officia et.',
+    observations: [
+      { name: 'codo izquierdo', grade: 90, improve: 'Aumentar inclinación' },
+      { name: 'codo derecho', grade: 90, improve: 'Disminuir inclinación' },
+    ],
   },
   {
     _id: '2',
     poomsae: 'poomsae 1',
     pose: 'pose 2',
-    grade: 80,
     date: Date.now(),
+    observations: [
+      { name: 'codo izquierdo', grade: 90, improve: 'Aumentar inclinación' },
+      { name: 'codo derecho', grade: 80, improve: 'Disminuir inclinación' },
+    ],
   },
   {
     _id: '3',
     poomsae: 'poomsae 1',
     pose: 'pose 3',
-    grade: 70,
     date: Date.now(),
+    observations: [
+      { name: 'codo izquierdo', grade: 90, improve: 'Aumentar inclinación' },
+      { name: 'codo derecho', grade: 80, improve: 'Disminuir inclinación' },
+    ],
   },
   {
     _id: '4',
     poomsae: 'poomsae 2',
     pose: 'pose 4',
-    grade: 90,
     date: Date.now(),
+    observations: [
+      { name: 'codo izquierdo', grade: 90, improve: 'Aumentar inclinación' },
+      { name: 'codo derecho', grade: 80, improve: 'Disminuir inclinación' },
+    ],
   },
   {
     _id: '5',
     poomsae: 'poomsae 2',
     pose: 'pose 5',
-    grade: 80,
     date: Date.now(),
+    observations: [
+      { name: 'codo izquierdo', grade: 90, improve: 'Aumentar inclinación' },
+      { name: 'codo derecho', grade: 80, improve: 'Disminuir inclinación' },
+    ],
   },
   {
     _id: '6',
     poomsae: 'poomsae 2',
     pose: 'pose 3',
-    grade: 70,
     date: Date.now(),
+    observations: [
+      { name: 'codo izquierdo', grade: 90, improve: 'Aumentar inclinación' },
+      { name: 'codo derecho', grade: 80, improve: 'Disminuir inclinación' },
+    ],
   },
 ];
 
@@ -107,19 +123,21 @@ export class DBService {
         res.forEach((historyItem) => {
           const currHistoryItem = modifiedHistory[historyItem.pose];
           const newDate = moment(historyItem.date).format('DD MMM YYYY hh:mm a');
+          const newBestGrade =
+            historyItem.observations.reduce((prev, curr) => {
+              return prev + curr.grade;
+            }, 0) / historyItem.observations.length;
           if (currHistoryItem) {
             const lastPractice = moment(newDate).isAfter(currHistoryItem.lastPractice)
               ? newDate
               : currHistoryItem.lastPractice;
-            const bestGrade = Number(
-              Math.max(currHistoryItem.bestGrade, historyItem.grade).toFixed(2)
-            );
+            const bestGrade = Number(Math.max(currHistoryItem.bestGrade, newBestGrade).toFixed(2));
 
             modifiedHistory[historyItem.pose] = {
               ...currHistoryItem,
               lastPractice,
               bestGrade,
-              rate: (bestGrade * 5) / 100,
+              rate: Math.round((bestGrade * 5) / 100),
               practices: [...currHistoryItem.practices, { ...historyItem, date: newDate }],
             };
           } else {
@@ -127,8 +145,8 @@ export class DBService {
               poomsae: historyItem.poomsae,
               pose: historyItem.pose,
               lastPractice: newDate,
-              bestGrade: historyItem.grade,
-              rate: (historyItem.grade * 5) / 100,
+              bestGrade: newBestGrade,
+              rate: Math.round((newBestGrade * 5) / 100),
               practices: [{ ...historyItem, date: newDate }],
             };
           }

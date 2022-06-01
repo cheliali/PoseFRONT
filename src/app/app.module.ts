@@ -22,6 +22,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { CardModule } from 'primeng/card';
 import { DataViewModule } from 'primeng/dataview';
 import { PosePracticeComponent } from './pages/pose-practice/pose-practice.component';
+import { SliderModule } from 'primeng/slider';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { PosePracticeComponent } from './pages/pose-practice/pose-practice.compo
     BrowserAnimationsModule,
     TableModule,
     DataViewModule,
+    SliderModule,
     // ContextMenuModule,
     // DropdownModule,
     ButtonModule,

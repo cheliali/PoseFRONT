@@ -7,7 +7,7 @@
         <th>Poomsae</th>
         <th>Pose</th>
         <th>Ultima Práctica</th>
-        <th>Promedio</th>
+        <th>Mejor Promedio</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-historyItem let-expanded="expanded">
@@ -43,7 +43,6 @@
               <ng-template pTemplate="header">
                 <tr>
                   <th>Fecha</th>
-                  <th>Nota</th>
                   <th>Foto</th>
                   <th>Observaciones</th>
                 </tr>
@@ -51,7 +50,6 @@
               <ng-template pTemplate="body" let-practice>
                 <tr class="subtable">
                   <td>{{ practice.date }}</td>
-                  <td>{{ practice.grade }}</td>
                   <td>
                     <img
                       src="{{
@@ -62,7 +60,25 @@
                       class="practice-picture"
                     />
                   </td>
-                  <td>{{ practice.observations || "No hay obervaciones" }}</td>
+                  <td>
+                    <ul>
+                      <li *ngFor="let observation of practice.observations">
+                        <div class="observation-wrapper">
+                          {{ observation.name }}: {{ observation.grade }}
+                          <div>
+                            {{ observation.improve }}
+                          </div>
+                          <div class="slider-wrapper">
+                            <p-slider
+                              [(ngModel)]="observation.grade"
+                              styleClass="prime-slider-override"
+                            ></p-slider>
+                            <br />
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </td>
                 </tr>
               </ng-template>
               <ng-template pTemplate="emptymessage">

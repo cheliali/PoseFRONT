@@ -2,10 +2,15 @@ export interface DBHistoryItem {
   _id: string;
   poomsae: string;
   pose: string;
-  grade: number;
   date: number | string;
   picture?: string;
-  observations?: string;
+  observations: DBObservation[];
+}
+
+export interface DBObservation {
+  name: string;
+  grade: number;
+  improve: string;
 }
 
 export interface ModHistory {
