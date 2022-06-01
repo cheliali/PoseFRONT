@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { LoginComponent } from './pages/login/login.component';
-import { Pos1Component } from './positions/pos1/pos1.component';
 import { ButtonModule } from 'primeng/button';
 import { RatingModule } from 'primeng/rating';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
@@ -28,7 +27,6 @@ import { SliderModule } from 'primeng/slider';
     AppComponent,
     InicioComponent,
     LoginComponent,
-    Pos1Component,
     NavBarComponent,
     PoseSelectionComponent,
     PosePracticeComponent,

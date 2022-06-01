@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseurl: 'http://raspberrypi:5000',
+  baseurl: 'http://127.0.0.1:5000',
 };
 
 // 'http://raspberrypi.local:5000';

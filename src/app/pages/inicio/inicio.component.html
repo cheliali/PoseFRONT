@@ -1,13 +1,13 @@
 <app-nav-bar></app-nav-bar>
-<div style="margin: 20px">
+<div style="margin: 30px">
   <p-table [value]="history" dataKey="pose" responsiveLayout="scroll">
     <ng-template pTemplate="header">
       <tr>
-        <th style="width: 3rem"></th>
-        <th>Poomsae</th>
-        <th>Pose</th>
-        <th>Ultima Práctica</th>
-        <th>Mejor Promedio</th>
+        <th style="width: 5%"></th>
+        <th style="width: 22%">Poomsae</th>
+        <th style="width: 22%">Pose</th>
+        <th style="width: 22%">Ultima Práctica</th>
+        <th style="width: 22%">Mejor Promedio</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-historyItem let-expanded="expanded">

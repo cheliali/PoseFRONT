@@ -1,5 +1,5 @@
 <app-nav-bar></app-nav-bar>
-<div class="wrapper">
+<div class="wrapper" style="margin: 30px">
   <p-tabView>
     <p-tabPanel *ngFor="let poomsae of poomsaes" [header]="poomsae.name">
       <p-dataView [value]="poomsae.poses">
@@ -12,12 +12,6 @@
             <ng-template pTemplate="header">
               <img class="card-image" alt="Card" [src]="pose.picture" />
             </ng-template>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Inventore sed consequuntur error repudiandae numquam deserunt
-              quisquam repellat libero asperiores earum nam nobis, culpa ratione
-              quam perferendis esse, cupiditate neque quas!
-            </p>
             <h5>
               Ultima práctica:
               <span style="font-weight: 300">{{
