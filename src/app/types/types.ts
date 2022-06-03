@@ -13,6 +13,12 @@ export interface DBObservation {
   improve: string;
 }
 
+export interface DBPoomsaes {
+  _id: string;
+  name: string;
+  poses: { name: string; picture: string }[];
+}
+
 export interface ModHistory {
   [key: string]: HistoryItem;
 }
@@ -24,10 +30,4 @@ export interface HistoryItem {
   bestGrade: number;
   rate: number;
   practices: DBHistoryItem[];
-}
-
-export interface DBPoomsaes {
-  _id: string;
-  name: string;
-  poses: { name: string; picture: string }[];
 }

@@ -1,7 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { map, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { ModHistory, DBHistoryItem, DBPoomsaes } from '../types/types';
+
+const baseurl = environment.baseurl;
 
 const history: DBHistoryItem[] = [
   {
@@ -35,86 +39,13 @@ const history: DBHistoryItem[] = [
       { name: 'codo derecho', grade: 80, improve: 'Disminuir inclinación' },
     ],
   },
-  {
-    _id: '4',
-    poomsae: 'poomsae 2',
-    pose: 'pose 4',
-    date: Date.now(),
-    observations: [
-      { name: 'codo izquierdo', grade: 90, improve: 'Aumentar inclinación' },
-      { name: 'codo derecho', grade: 80, improve: 'Disminuir inclinación' },
-    ],
-  },
-  {
-    _id: '5',
-    poomsae: 'poomsae 2',
-    pose: 'pose 5',
-    date: Date.now(),
-    observations: [
-      { name: 'codo izquierdo', grade: 90, improve: 'Aumentar inclinación' },
-      { name: 'codo derecho', grade: 80, improve: 'Disminuir inclinación' },
-    ],
-  },
-  {
-    _id: '6',
-    poomsae: 'poomsae 2',
-    pose: 'pose 3',
-    date: Date.now(),
-    observations: [
-      { name: 'codo izquierdo', grade: 90, improve: 'Aumentar inclinación' },
-      { name: 'codo derecho', grade: 80, improve: 'Disminuir inclinación' },
-    ],
-  },
-];
-
-const poomsaes: DBPoomsaes[] = [
-  {
-    _id: '1',
-    name: 'Poomsae 1',
-    poses: [
-      {
-        name: 'are maki',
-        picture: 'https://www.taekwondoalgete.com/files/janmonyopmk.jpg',
-      },
-      {
-        name: 'taegeuk',
-        picture: 'https://i.ytimg.com/vi/Q5NNLfoVEGY/mqdefault.jpg',
-      },
-      {
-        name: 'pose 3',
-        picture: 'https://www.taekwondoalgete.com/files/janmonyopmk.jpg',
-      },
-      {
-        name: 'pose 4',
-        picture: 'https://www.taekwondoalgete.com/files/janmonyopmk.jpg',
-      },
-      {
-        name: 'pose 5',
-        picture: 'https://www.taekwondoalgete.com/files/janmonyopmk.jpg',
-      },
-      {
-        name: 'pose 6',
-        picture: 'https://www.taekwondoalgete.com/files/janmonyopmk.jpg',
-      },
-    ],
-  },
-  {
-    _id: '2',
-    name: 'Poomsae 2',
-    poses: [
-      {
-        name: 'pose 1',
-        picture: 'https://www.taekwondoalgete.com/files/janmonyopmk.jpg',
-      },
-    ],
-  },
 ];
 
 @Injectable({
   providedIn: 'root',
 })
 export class DBService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getHistory() {
     return of(history).pipe(
@@ -158,6 +89,6 @@ export class DBService {
   }
 
   getPoomsaes() {
-    return of(poomsaes);
+    return this.http.get<DBPoomsaes[]>(`${baseurl}/getpoomsaeposes`);
   }
 }
