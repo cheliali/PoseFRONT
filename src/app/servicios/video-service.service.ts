@@ -9,29 +9,13 @@ const baseurl = environment.baseurl;
   providedIn: 'root',
 })
 export class VideoServiceService {
-  nombre: string = 'Poomsae Practice';
-
   constructor(private http: HttpClient) {}
 
-  /* getUser() {
-    this.http.get<User>('https://reqres.in/api/users/2').subscribe((res) => {
-      this.nombre = res.data.first_name;
-    });
-  } */
-
-  startStream() {
-    return this.http.get(`${baseurl}/iniciar`);
+  startStream(datos: string) {
+    return this.http.get(`${baseurl}/iniciar${datos}`);
   }
 
   stopStream() {
     return this.http.get(`${baseurl}/terminar`);
-  }
-
-  createUser(data: any) {
-    return this.http.post(`${baseurl}/register`, data);
-  }
-
-  loginUser(data: any) {
-    return this.http.post(`${baseurl}/login`, data);
   }
 }

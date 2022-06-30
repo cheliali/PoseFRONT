@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VideoServiceService } from 'src/app/servicios/video-service.service';
 import { environment } from 'src/environments/environment';
 
@@ -11,22 +11,42 @@ const baseurl = environment.baseurl;
 })
 export class PosePracticeComponent implements OnInit {
   currentPose!: string;
+  userName!: string;
   mostrar: boolean = false;
-  url: string = `${baseurl}/video_feed`;
-  constructor(private route: ActivatedRoute, public videoService: VideoServiceService) {}
+  url: string = `${baseurl}/video_feed?test=${Date().toString()}`;
+  displayModal: boolean = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    public videoService: VideoServiceService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.currentPose = this.route.snapshot.paramMap.get('name') || '';
-  }
-  cambiar() {
-    if (!this.mostrar) {
-      this.videoService.startStream().subscribe((_) => {
-        this.mostrar = true;
+    this.currentPose = this.route.snapshot.paramMap.get('pose') || '';
+    this.userName = this.route.snapshot.paramMap.get('name') || '';
+    this.videoService
+      .startStream(`?userid=${this.userName}&pose=${this.currentPose}`)
+      .subscribe(() => {
+        this.startPractice();
       });
-    } else {
+  }
+
+  startPractice() {
+    this.displayModal = false;
+    this.mostrar = true;
+    this.url = `${baseurl}/video_feed?test=${Date().toString()}`;
+
+    setTimeout(() => {
       this.videoService.stopStream().subscribe((_) => {
         this.mostrar = false;
+        this.displayModal = true;
       });
-    }
+    }, 15000);
+  }
+
+  returnToSelection() {
+    this.displayModal = false;
+    this.router.navigateByUrl(`poses`);
   }
 }

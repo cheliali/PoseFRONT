@@ -19,7 +19,7 @@ export class PoseSelectionComponent implements OnInit {
     this.dbService.getHistory().subscribe((resp) => (this.history = resp));
   }
 
-  goToPractice(name: string) {
-    this.router.navigateByUrl(`pose/${name}`);
+  goToPractice(pose: string) {
+    this.router.navigateByUrl(`pose/${this.dbService.username}/${pose}`);
   }
 }

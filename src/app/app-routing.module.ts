@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'inicio', component: InicioComponent },
   { path: 'poses', component: PoseSelectionComponent },
-  { path: 'pose/:name', component: PosePracticeComponent, pathMatch: 'full' },
+  { path: 'pose/:name/:pose', component: PosePracticeComponent, pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 

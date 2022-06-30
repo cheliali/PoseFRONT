@@ -2,5 +2,31 @@
 <h1>{{ currentPose }}</h1>
 <div class="video-wrapper">
   <img *ngIf="mostrar" [src]="url" width="500" height="500" />
-  <button (click)="cambiar()">Empezar</button>
 </div>
+<p-dialog
+  header="Resultado"
+  [(visible)]="displayModal"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <p class="m-0">
+    Felicitaciones, has completado la práctica, tu calificación es:
+  </p>
+  <h3>10</h3>
+  <ng-template pTemplate="footer">
+    <p-button
+      icon="pi pi-check"
+      (click)="returnToSelection()"
+      label="Ok"
+      styleClass="p-button-text"
+    ></p-button>
+    <p-button
+      icon="pi pi-check"
+      (click)="startPractice()"
+      label="Reintentar"
+      styleClass="p-button-text"
+    ></p-button>
+  </ng-template>
+</p-dialog>

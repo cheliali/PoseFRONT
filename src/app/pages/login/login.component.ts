@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { VideoServiceService } from 'src/app/servicios/video-service.service';
+import { Router } from '@angular/router';
+import { DBService } from 'src/app/servicios/database.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,10 +10,7 @@ import { VideoServiceService } from 'src/app/servicios/video-service.service';
 export class LoginComponent implements OnInit {
   registroForm!: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    public videoService: VideoServiceService
-  ) {}
+  constructor(private fb: FormBuilder, public databaseService: DBService, private router: Router) {}
 
   ngOnInit() {
     this.registroForm = this.fb.group({
@@ -27,9 +25,15 @@ export class LoginComponent implements OnInit {
     }
     const { username, password } = this.registroForm.value;
     if (accion == 'register') {
-      this.videoService.createUser({ username, password }).subscribe();
+      this.databaseService.createUser({ username, password }).subscribe(() => {
+        this.databaseService.username = username;
+        this.router.navigateByUrl(`inicio`);
+      });
     } else {
-      this.videoService.loginUser({ username, password }).subscribe();
+      this.databaseService.loginUser({ username, password }).subscribe(() => {
+        this.databaseService.username = username;
+        this.router.navigateByUrl(`inicio`);
+      });
     }
   }
 }

@@ -45,7 +45,17 @@ const history: DBHistoryItem[] = [
   providedIn: 'root',
 })
 export class DBService {
+  username: string = '';
+
   constructor(private http: HttpClient) {}
+
+  createUser(data: any) {
+    return this.http.post(`${baseurl}/register`, data);
+  }
+
+  loginUser(data: any) {
+    return this.http.post(`${baseurl}/login`, data);
+  }
 
   getHistory() {
     return of(history).pipe(

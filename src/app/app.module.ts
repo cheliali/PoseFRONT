@@ -21,6 +21,7 @@ import { CardModule } from 'primeng/card';
 import { DataViewModule } from 'primeng/dataview';
 import { PosePracticeComponent } from './pages/pose-practice/pose-practice.component';
 import { SliderModule } from 'primeng/slider';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { SliderModule } from 'primeng/slider';
     RatingModule,
     MenubarModule,
     CardModule,
+    DialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

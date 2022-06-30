@@ -7,3 +7,14 @@ button {
   background-color: black;
 
 }
+
+.navBar_wrapper{
+  position: fixed;
+  z-index: 10;
+  top:0;
+  width:100%;
+}
+
+.nav_spacer{
+  height: 70px;
+}
