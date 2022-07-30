@@ -18,4 +18,8 @@ export class VideoServiceService {
   stopStream() {
     return this.http.get(`${baseurl}/terminar`);
   }
+
+  evaluate() {
+    return this.http.get(`${baseurl}/evaluate`);
+  }
 }

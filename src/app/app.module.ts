@@ -22,6 +22,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { PosePracticeComponent } from './pages/pose-practice/pose-practice.component';
 import { SliderModule } from 'primeng/slider';
 import { DialogModule } from 'primeng/dialog';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { DialogModule } from 'primeng/dialog';
     MenubarModule,
     CardModule,
     DialogModule,
+    ProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

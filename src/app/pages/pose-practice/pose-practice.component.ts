@@ -15,6 +15,7 @@ export class PosePracticeComponent implements OnInit {
   mostrar: boolean = false;
   url: string = `${baseurl}/video_feed?test=${Date().toString()}`;
   displayModal: boolean = false;
+  loading: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,8 +42,14 @@ export class PosePracticeComponent implements OnInit {
       this.videoService.stopStream().subscribe((_) => {
         this.mostrar = false;
         this.displayModal = true;
+        this.loading = true;
+
+        this.videoService.evaluate().subscribe((resp) => {
+          console.log(resp);
+          this.loading = false;
+        });
       });
-    }, 15000);
+    }, 7000);
   }
 
   returnToSelection() {

@@ -14,7 +14,8 @@
   <p class="m-0">
     Felicitaciones, has completado la práctica, tu calificación es:
   </p>
-  <h3>10</h3>
+  <h3 *ngIf="!loading">10</h3>
+  <p-progressSpinner *ngIf="loading"></p-progressSpinner>
   <ng-template pTemplate="footer">
     <p-button
       icon="pi pi-check"
