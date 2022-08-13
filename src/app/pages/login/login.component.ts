@@ -27,11 +27,13 @@ export class LoginComponent implements OnInit {
     if (accion == 'register') {
       this.databaseService.createUser({ username, password }).subscribe(() => {
         this.databaseService.username = username;
+        localStorage.setItem('username', username);
         this.router.navigateByUrl(`inicio`);
       });
     } else {
       this.databaseService.loginUser({ username, password }).subscribe(() => {
         this.databaseService.username = username;
+        localStorage.setItem('username', username);
         this.router.navigateByUrl(`inicio`);
       });
     }

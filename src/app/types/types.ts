@@ -26,8 +26,13 @@ export interface ModHistory {
 export interface HistoryItem {
   poomsae: string;
   pose: string;
-  lastPractice: string;
-  bestGrade: number;
+  lastPractice?: string;
+  bestGrade?: number;
   rate: number;
   practices: DBHistoryItem[];
+}
+
+export interface GradesResponse {
+  calificacion: string;
+  name: string;
 }

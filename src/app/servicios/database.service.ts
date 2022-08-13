@@ -10,8 +10,8 @@ const baseurl = environment.baseurl;
 const history: DBHistoryItem[] = [
   {
     _id: '1',
-    poomsae: 'poomsae 1',
-    pose: 'are maki',
+    poomsae: 'Poomsae 1',
+    pose: 'Oen Arae Makki',
     date: Date.now(),
     picture: 'https://www.taekwondoalgete.com/files/janmonyopmk.jpg',
     observations: [
@@ -21,8 +21,8 @@ const history: DBHistoryItem[] = [
   },
   {
     _id: '2',
-    poomsae: 'poomsae 1',
-    pose: 'pose 2',
+    poomsae: 'Poomsae 1',
+    pose: 'Oen Olgul Makki',
     date: Date.now(),
     observations: [
       { name: 'codo izquierdo', grade: 90, improve: 'Aumentar inclinación' },
@@ -31,8 +31,8 @@ const history: DBHistoryItem[] = [
   },
   {
     _id: '3',
-    poomsae: 'poomsae 1',
-    pose: 'pose 3',
+    poomsae: 'Poomsae 1',
+    pose: 'Oen Ap Kubi',
     date: Date.now(),
     observations: [
       { name: 'codo izquierdo', grade: 90, improve: 'Aumentar inclinación' },
@@ -46,6 +46,7 @@ const history: DBHistoryItem[] = [
 })
 export class DBService {
   username: string = '';
+  poomsaes!: DBPoomsaes[];
 
   constructor(private http: HttpClient) {}
 
@@ -72,7 +73,9 @@ export class DBService {
             const lastPractice = moment(newDate).isAfter(currHistoryItem.lastPractice)
               ? newDate
               : currHistoryItem.lastPractice;
-            const bestGrade = Number(Math.max(currHistoryItem.bestGrade, newBestGrade).toFixed(2));
+            const bestGrade = Number(
+              Math.max(currHistoryItem.bestGrade || 0, newBestGrade).toFixed(2)
+            );
 
             modifiedHistory[historyItem.pose] = {
               ...currHistoryItem,

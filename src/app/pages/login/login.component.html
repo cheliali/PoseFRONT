@@ -1,6 +1,6 @@
 <div class="sidenav">
   <div class="login-main-text">
-    <h2>Login or register to access</h2>
+    <h2>Inicia sesión o regístrate para acceder</h2>
   </div>
 </div>
 <div class="main">
@@ -8,21 +8,21 @@
     <div class="login-form">
       <form [formGroup]="registroForm">
         <div class="form-group">
-          <label>User Name</label>
+          <label>Nombre de Usuario</label>
           <input
             type="text"
             class="form-control"
             formControlName="username"
-            placeholder="User Name"
+            placeholder="Nombre de Usuario"
           />
         </div>
         <div class="form-group">
-          <label>Password</label>
+          <label>Contraseña</label>
           <input
             type="password"
             class="form-control"
             formControlName="password"
-            placeholder="Password"
+            placeholder="Contraseña"
           />
         </div>
         <button
@@ -31,7 +31,7 @@
           class="btn btn-black"
           (click)="loginYcrearUsuario('login')"
         >
-          Login
+          Iniciar Sesión
         </button>
         <button
           type="button"
@@ -39,7 +39,7 @@
           class="btn btn-secondary"
           (click)="loginYcrearUsuario('register')"
         >
-          Register
+          Registrar
         </button>
       </form>
     </div>

@@ -1,8 +1,23 @@
 <app-nav-bar></app-nav-bar>
-<h1>{{ currentPose }}</h1>
+<h1 class="title">{{ currentPose }}</h1>
 <div class="video-wrapper">
   <img *ngIf="mostrar" [src]="url" width="500" height="500" />
+  <img *ngIf="mostrar" [src]="modelPictureURL" width="500" height="500" />
 </div>
+
+<p-dialog
+  [(visible)]="!mostrar"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [resizable]="false"
+  [closable]="false"
+>
+  <h4 style="text-align: center">Ubíquese por favor</h4>
+  <h3 style="text-align: center">La práctica comienza en:</h3>
+  <h1 style="text-align: center">{{ initialCounter }}</h1>
+</p-dialog>
+
 <p-dialog
   header="Resultado"
   [(visible)]="displayModal"
@@ -11,16 +26,19 @@
   [draggable]="false"
   [resizable]="false"
 >
-  <p class="m-0">
-    Felicitaciones, has completado la práctica, tu calificación es:
-  </p>
-  <h3 *ngIf="!loading">10</h3>
-  <p-progressSpinner *ngIf="loading"></p-progressSpinner>
+  <p *ngIf="!grade.includes('Intente')" class="m-0">Tu calificación es:</p>
+  <h3 *ngIf="!loading">{{ grade }}</h3>
+  <div class="loader_wrapper">
+    <p-progressSpinner
+      *ngIf="loading"
+      [style]="{ width: '50px', height: '50px' }"
+    ></p-progressSpinner>
+  </div>
   <ng-template pTemplate="footer">
     <p-button
       icon="pi pi-check"
       (click)="returnToSelection()"
-      label="Ok"
+      label="Finalizar"
       styleClass="p-button-text"
     ></p-button>
     <p-button

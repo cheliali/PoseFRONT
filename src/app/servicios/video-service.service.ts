@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, take } from 'rxjs';
 import { User } from '../models/User';
 import { environment } from 'src/environments/environment';
+import { GradesResponse } from '../types/types';
 
 const baseurl = environment.baseurl;
 @Injectable({
@@ -20,6 +21,6 @@ export class VideoServiceService {
   }
 
   evaluate() {
-    return this.http.get(`${baseurl}/evaluate`);
+    return this.http.get<GradesResponse[]>(`${baseurl}/evaluate`);
   }
 }

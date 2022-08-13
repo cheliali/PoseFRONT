@@ -1,7 +1,10 @@
 <app-nav-bar></app-nav-bar>
 <div class="wrapper" style="margin: 30px">
-  <p-tabView>
-    <p-tabPanel *ngFor="let poomsae of poomsaes" [header]="poomsae.name">
+  <p-tabView *ngIf="dbService.poomsaes && dbService.poomsaes.length > 0">
+    <p-tabPanel
+      *ngFor="let poomsae of dbService.poomsaes"
+      [header]="poomsae.name"
+    >
       <p-dataView [value]="poomsae.poses">
         <ng-template let-pose pTemplate="listItem">
           <p-card
