@@ -15,14 +15,14 @@ export class NavBarComponent implements OnInit {
   ngOnInit() {
     this.items = [
       {
-        label: 'History',
+        label: 'Historial',
         icon: 'pi pi-history',
         command: () => {
           this.router.navigateByUrl('/inicio');
         },
       },
       {
-        label: 'Practice',
+        label: 'Practicar',
         icon: 'fa-solid fa-user-ninja',
         command: () => {
           this.router.navigateByUrl('/poses');
