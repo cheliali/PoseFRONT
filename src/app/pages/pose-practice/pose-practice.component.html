@@ -1,12 +1,12 @@
 <app-nav-bar></app-nav-bar>
 <h1 class="title">{{ currentPose }}</h1>
-<div class="video-wrapper">
-  <img *ngIf="mostrar" [src]="url" width="500" height="500" />
-  <img *ngIf="mostrar" [src]="modelPictureURL" width="500" height="500" />
+<div class="video-wrapper" *ngIf="showVideo">
+  <img [src]="url" width="500" height="500" />
+  <img [src]="modelPictureURL" width="500" height="500" />
 </div>
 
 <p-dialog
-  [(visible)]="!mostrar"
+  [(visible)]="showCountDown"
   [modal]="true"
   [style]="{ width: '50vw' }"
   [draggable]="false"
@@ -43,7 +43,7 @@
     ></p-button>
     <p-button
       icon="pi pi-check"
-      (click)="startPractice()"
+      (click)="startProcess()"
       label="Reintentar"
       styleClass="p-button-text"
     ></p-button>

@@ -59,6 +59,7 @@ export class DBService {
   }
 
   getHistory() {
+    // return this.http.get(`${baseurl}/getHistory`);.pipe(
     return of(history).pipe(
       map((res) => {
         const modifiedHistory: ModHistory = {};

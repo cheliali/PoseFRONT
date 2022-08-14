@@ -1,6 +1,7 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { debounceTime } from 'rxjs';
 import { DBService } from 'src/app/servicios/database.service';
 import { VideoServiceService } from 'src/app/servicios/video-service.service';
 import { environment } from 'src/environments/environment';
@@ -14,12 +15,13 @@ const baseurl = environment.baseurl;
 export class PosePracticeComponent implements OnInit {
   currentPose!: string;
   userName!: string;
-  mostrar: boolean = false;
-  url: string = `${baseurl}/video_feed?test=${Date().toString()}`;
+  showVideo: boolean = false;
+  showCountDown: boolean = false;
+  url: string = ``;
   displayModal: boolean = false;
   loading: boolean = false;
   grade: string = '';
-  initialCounter: number = 5;
+  initialCounter!: number;
   modelPictureURL: string = '';
 
   constructor(
@@ -54,9 +56,14 @@ export class PosePracticeComponent implements OnInit {
   }
 
   startProcess() {
+    this.displayModal = false;
+    this.initialCounter = 5;
+    this.url = `${baseurl}/video_feed?test=${Date().toString()}`;
     const interval = setInterval(() => {
-      this.mostrar = true;
+      this.showVideo = true;
+      this.showCountDown = true;
       if (this.initialCounter == 0) {
+        this.showCountDown = false;
         clearInterval(interval);
         this.videoService
           .startStream(`?userid=${this.userName}&pose=${this.currentPose}`)
@@ -65,7 +72,12 @@ export class PosePracticeComponent implements OnInit {
               this.startPractice();
             } else {
               window.alert('no se detecta persona');
-              this.router.navigateByUrl('/poses');
+              this.videoService
+                .stopStream()
+                .pipe(debounceTime(1000))
+                .subscribe(() => {
+                  this.router.navigateByUrl('/poses');
+                });
             }
           });
       } else {
@@ -74,32 +86,31 @@ export class PosePracticeComponent implements OnInit {
     }, 1000);
   }
   startPractice() {
-    this.displayModal = false;
-
-    this.url = `${baseurl}/video_feed?test=${Date().toString()}`;
-
     setTimeout(() => {
-      this.videoService.stopStream().subscribe((_) => {
-        this.mostrar = false;
-        this.displayModal = true;
-        this.loading = true;
+      this.showVideo = false;
+      this.videoService
+        .stopStream()
+        .pipe(debounceTime(1500))
+        .subscribe((_) => {
+          this.displayModal = true;
+          this.loading = true;
 
-        this.videoService.evaluate().subscribe((resp) => {
-          console.log(resp);
-          this.grade =
-            resp.length == 0
-              ? 'Intente de nuevo'
-              : (
-                  resp.reduce((prev, cur) => {
-                    return prev + Number(cur.calificacion);
-                  }, 0) / resp.length
-                )
-                  .toString()
-                  .concat('/100');
+          this.videoService.evaluate().subscribe((resp) => {
+            console.log(resp);
+            this.grade =
+              resp.length == 0
+                ? 'Intente de nuevo'
+                : (
+                    resp.reduce((prev, cur) => {
+                      return prev + Number(cur.calificacion);
+                    }, 0) / resp.length
+                  )
+                    .toString()
+                    .concat('/100');
 
-          this.loading = false;
+            this.loading = false;
+          });
         });
-      });
     }, 10000);
   }
 
