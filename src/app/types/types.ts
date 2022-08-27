@@ -16,7 +16,7 @@ export interface DBObservation {
 export interface DBPoomsaes {
   _id: string;
   name: string;
-  poses: { name: string; picture: string }[];
+  poses: { name: string; picture: string; description: string }[];
 }
 
 export interface ModHistory {
@@ -44,5 +44,5 @@ export enum BodyPart {
   'rightcodo' = 'Codo Derecho',
   'leftcodo' = 'Codo Izquierdo',
   'distancefeet' = 'Distancia entre pies',
-  'distanceankles' = 'Distancia entre rodillas',
+  'distanceknees' = 'Distancia entre rodillas',
 }

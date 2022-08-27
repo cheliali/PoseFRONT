@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { DBService } from '../../servicios/database.service';
-import { ModHistory, HistoryItem, DBHistoryItem } from '../../types/types';
+import { HistoryItem, DBHistoryItem, BodyPart } from '../../types/types';
 import * as moment from 'moment';
 
 @Component({
@@ -40,6 +40,16 @@ export class InicioComponent implements OnInit {
         return {
           ...pose,
           practices: pose.practices.reduce<DBHistoryItem[]>((prev, curr) => {
+            curr = {
+              ...curr,
+              observations: curr.observations
+                .filter((o) => o.name !== 'distancehipknee' && o.grade !== '100')
+                .map((o) => ({
+                  ...o,
+                  name: BodyPart[o.name as keyof typeof BodyPart],
+                })),
+            };
+
             if (prev.length > 0 && moment(curr.date).isAfter(prev[0].date)) {
               return [curr, ...prev];
             }

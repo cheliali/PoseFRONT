@@ -23,6 +23,7 @@ import { PosePracticeComponent } from './pages/pose-practice/pose-practice.compo
 import { SliderModule } from 'primeng/slider';
 import { DialogModule } from 'primeng/dialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { AboutComponent } from './pages/about/about.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     NavBarComponent,
     PoseSelectionComponent,
     PosePracticeComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

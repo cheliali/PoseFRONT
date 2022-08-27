@@ -5,11 +5,13 @@ import { LoginComponent } from './pages/login/login.component';
 import { PoseSelectionComponent } from './pages/pose-selection/pose-selection.component';
 import { PosePracticeComponent } from './pages/pose-practice/pose-practice.component';
 import { AuthenticatedGuard } from './guards/authenticated.guard';
+import { AboutComponent } from './pages/about/about.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AuthenticatedGuard] },
   { path: 'inicio', component: InicioComponent, canActivate: [AuthenticatedGuard] },
   { path: 'poses', component: PoseSelectionComponent, canActivate: [AuthenticatedGuard] },
+  { path: 'about', component: AboutComponent, canActivate: [AuthenticatedGuard] },
   {
     path: 'pose/:name/:pose',
     component: PosePracticeComponent,

@@ -92,7 +92,7 @@ export class DBService {
               poomsae: historyItem.poomsae,
               pose: historyItem.pose,
               lastPractice: newDate,
-              bestGrade: newBestGrade,
+              bestGrade: Number(newBestGrade.toFixed(2)),
               rate: Math.round((newBestGrade * 5) / 100),
               practices: [{ ...historyItem, date: newDate }],
             };

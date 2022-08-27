@@ -77,9 +77,11 @@ export class PosePracticeComponent implements OnInit {
               window.alert('no se detecta persona');
               this.videoService
                 .stopStream()
-                .pipe(debounceTime(1000))
+                .pipe(debounceTime(1500))
                 .subscribe(() => {
-                  this.router.navigateByUrl('/poses');
+                  this.videoService.evaluate().subscribe(() => {
+                    this.router.navigateByUrl('/poses');
+                  });
                 });
             }
           });
@@ -100,10 +102,12 @@ export class PosePracticeComponent implements OnInit {
 
           this.videoService.evaluate().subscribe((resp) => {
             console.log(resp);
-            this.observations = resp.map((p) => ({
-              ...p,
-              name: BodyPart[p.name as keyof typeof BodyPart],
-            }));
+            this.observations = resp
+              .filter((o) => o.name !== 'distancehipknee' && o.grade !== '100')
+              .map((p) => ({
+                ...p,
+                name: BodyPart[p.name as keyof typeof BodyPart],
+              }));
             this.grade =
               resp.length == 0
                 ? 'Intente de nuevo'
@@ -112,6 +116,7 @@ export class PosePracticeComponent implements OnInit {
                       return prev + Number(cur.grade);
                     }, 0) / resp.length
                   )
+                    .toFixed(2)
                     .toString()
                     .concat('/100');
 

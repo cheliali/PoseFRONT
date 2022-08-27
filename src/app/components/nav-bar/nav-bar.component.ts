@@ -15,6 +15,13 @@ export class NavBarComponent implements OnInit {
   ngOnInit() {
     this.items = [
       {
+        label: 'Acerca',
+        icon: 'fa-solid fa-info-circle',
+        command: () => {
+          this.router.navigateByUrl('/about');
+        },
+      },
+      {
         label: 'Historial',
         icon: 'pi pi-history',
         command: () => {

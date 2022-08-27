@@ -1,0 +1,28 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.about_wrapper {
+  margin: 30px 70px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    text-align: center;
+  }
+
+  p {
+    text-align: justify;
+  }
+
+  h2 {
+    align-self: flex-start;
+  }
+
+  img {
+    width: 35vw;
+  }
+}

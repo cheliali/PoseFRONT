@@ -9,6 +9,7 @@
         <ng-template let-pose pTemplate="listItem">
           <p-card
             [header]="pose.name"
+            [subheader]="pose.description"
             [style]="{ width: '22rem', margin: '1rem' }"
             (click)="goToPractice(pose.name)"
           >
