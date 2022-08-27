@@ -9,7 +9,7 @@ export interface DBHistoryItem {
 
 export interface DBObservation {
   name: string;
-  grade: number;
+  grade: string;
   improve: string;
 }
 
@@ -33,6 +33,16 @@ export interface HistoryItem {
 }
 
 export interface GradesResponse {
-  calificacion: string;
+  grade: string;
   name: string;
+  improve: string;
+}
+
+export enum BodyPart {
+  'rightax' = 'Axila Derecha',
+  'leftax' = 'Axila Izquierda',
+  'rightcodo' = 'Codo Derecho',
+  'leftcodo' = 'Codo Izquierdo',
+  'distancefeet' = 'Distancia entre pies',
+  'distanceankles' = 'Distancia entre rodillas',
 }

@@ -28,6 +28,9 @@
 >
   <p *ngIf="!grade.includes('Intente')" class="m-0">Tu calificación es:</p>
   <h3 *ngIf="!loading">{{ grade }}</h3>
+  <h5 *ngFor="let observation of observations">
+    {{ observation.name }}: {{ observation.improve }}
+  </h5>
   <div class="loader_wrapper">
     <p-progressSpinner
       *ngIf="loading"

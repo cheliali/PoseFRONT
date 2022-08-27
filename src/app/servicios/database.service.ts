@@ -6,40 +6,42 @@ import { environment } from 'src/environments/environment';
 import { ModHistory, DBHistoryItem, DBPoomsaes } from '../types/types';
 
 const baseurl = environment.baseurl;
-
-const history: DBHistoryItem[] = [
-  {
-    _id: '1',
-    poomsae: 'Poomsae 1',
-    pose: 'Oen Arae Makki',
-    date: Date.now(),
-    picture: 'https://www.taekwondoalgete.com/files/janmonyopmk.jpg',
-    observations: [
-      { name: 'codo izquierdo', grade: 90, improve: 'Aumentar inclinación' },
-      { name: 'codo derecho', grade: 90, improve: 'Disminuir inclinación' },
-    ],
-  },
-  {
-    _id: '2',
-    poomsae: 'Poomsae 1',
-    pose: 'Oen Olgul Makki',
-    date: Date.now(),
-    observations: [
-      { name: 'codo izquierdo', grade: 90, improve: 'Aumentar inclinación' },
-      { name: 'codo derecho', grade: 80, improve: 'Disminuir inclinación' },
-    ],
-  },
-  {
-    _id: '3',
-    poomsae: 'Poomsae 1',
-    pose: 'Oen Ap Kubi',
-    date: Date.now(),
-    observations: [
-      { name: 'codo izquierdo', grade: 90, improve: 'Aumentar inclinación' },
-      { name: 'codo derecho', grade: 80, improve: 'Disminuir inclinación' },
-    ],
-  },
-];
+const today = new Date();
+// const history: DBHistoryItem[] = [
+//   {
+//     _id: '1',
+//     poomsae: 'Poomsae 1',
+//     pose: 'Oen Arae Makki',
+//     date: Date.now(),
+//     picture: 'https://www.taekwondoalgete.com/files/janmonyopmk.jpg',
+//     observations: [
+//       { name: 'codo izquierdo', grade: '100', improve: 'Aumentar inclinación' },
+//       { name: 'codo derecho', grade: '90', improve: 'Disminuir inclinación' },
+//     ],
+//   },
+//   {
+//     _id: '1',
+//     poomsae: 'Poomsae 1',
+//     pose: 'Oen Arae Makki',
+//     date: today.setDate(today.getDate() + 1),
+//     picture: 'https://www.taekwondoalgete.com/files/janmonyopmk.jpg',
+//     observations: [
+//       { name: 'codo izquierdo', grade: '100', improve: 'Aumentar inclinación' },
+//       { name: 'codo derecho', grade: '90', improve: 'Disminuir inclinación' },
+//     ],
+//   },
+//   {
+//     _id: '1',
+//     poomsae: 'Poomsae 1',
+//     pose: 'Oen Arae Makki',
+//     date: today.setDate(today.getDate() + 2),
+//     picture: 'https://www.taekwondoalgete.com/files/janmonyopmk.jpg',
+//     observations: [
+//       { name: 'codo izquierdo', grade: '100', improve: 'Aumentar inclinación' },
+//       { name: 'codo derecho', grade: '90', improve: 'Disminuir inclinación' },
+//     ],
+//   },
+// ];
 
 @Injectable({
   providedIn: 'root',
@@ -59,8 +61,8 @@ export class DBService {
   }
 
   getHistory() {
-    // return this.http.get(`${baseurl}/getHistory`);.pipe(
-    return of(history).pipe(
+    return this.http.get<DBHistoryItem[]>(`${baseurl}/getHistory?userid=${this.username}`).pipe(
+      // return of(history).pipe(
       map((res) => {
         const modifiedHistory: ModHistory = {};
         res.forEach((historyItem) => {
@@ -68,7 +70,7 @@ export class DBService {
           const newDate = moment(historyItem.date).format('DD MMM YYYY hh:mm a');
           const newBestGrade =
             historyItem.observations.reduce((prev, curr) => {
-              return prev + curr.grade;
+              return prev + +curr.grade;
             }, 0) / historyItem.observations.length;
           if (currHistoryItem) {
             const lastPractice = moment(newDate).isAfter(currHistoryItem.lastPractice)

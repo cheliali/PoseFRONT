@@ -4,7 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime } from 'rxjs';
 import { DBService } from 'src/app/servicios/database.service';
 import { VideoServiceService } from 'src/app/servicios/video-service.service';
+import { GradesResponse } from 'src/app/types/types';
 import { environment } from 'src/environments/environment';
+import { BodyPart } from '../../types/types';
 
 const baseurl = environment.baseurl;
 @Component({
@@ -23,6 +25,7 @@ export class PosePracticeComponent implements OnInit {
   grade: string = '';
   initialCounter!: number;
   modelPictureURL: string = '';
+  observations!: GradesResponse[];
 
   constructor(
     private route: ActivatedRoute,
@@ -97,12 +100,16 @@ export class PosePracticeComponent implements OnInit {
 
           this.videoService.evaluate().subscribe((resp) => {
             console.log(resp);
+            this.observations = resp.map((p) => ({
+              ...p,
+              name: BodyPart[p.name as keyof typeof BodyPart],
+            }));
             this.grade =
               resp.length == 0
                 ? 'Intente de nuevo'
                 : (
                     resp.reduce((prev, cur) => {
-                      return prev + Number(cur.calificacion);
+                      return prev + Number(cur.grade);
                     }, 0) / resp.length
                   )
                     .toString()
@@ -111,7 +118,7 @@ export class PosePracticeComponent implements OnInit {
             this.loading = false;
           });
         });
-    }, 10000);
+    }, 7000);
   }
 
   returnToSelection() {

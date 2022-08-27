@@ -1,5 +1,5 @@
 <app-nav-bar></app-nav-bar>
-<div class="wrapper" style="margin: 30px">
+<div class="wrapper" style="margin: 25px">
   <p-tabView *ngIf="dbService.poomsaes && dbService.poomsaes.length > 0">
     <p-tabPanel
       *ngFor="let poomsae of dbService.poomsaes"
@@ -9,21 +9,21 @@
         <ng-template let-pose pTemplate="listItem">
           <p-card
             [header]="pose.name"
-            [style]="{ width: '25rem', margin: '1.5rem' }"
+            [style]="{ width: '22rem', margin: '1rem' }"
             (click)="goToPractice(pose.name)"
           >
             <ng-template pTemplate="header">
               <img class="card-image" alt="Card" [src]="pose.picture" />
             </ng-template>
             <h5>
-              Ultima práctica:
-              <span style="font-weight: 300">{{
+              Ultima Práctica:
+              <span style="font-weight: 200">{{
                 history[pose.name]?.lastPractice || "No hay prácticas previas"
               }}</span>
             </h5>
             <h5>
-              Mejor Puntaje:
-              <span style="font-weight: 300">{{
+              Mejor Promedio:
+              <span style="font-weight: 200">{{
                 history[pose.name]?.bestGrade || "No hay puntajes previos"
               }}</span>
             </h5>
